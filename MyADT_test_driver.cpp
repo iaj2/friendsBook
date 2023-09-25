@@ -2,6 +2,8 @@
  * MyADT_test_driver
  * 
  * Description: unit tests for MyADT class methods.
+ * 
+ * Author: Isaac James
 */
 
 #include <iostream>

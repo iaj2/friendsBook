@@ -8,7 +8,7 @@
  *                     ascending sort order of search key. 
  *                   - Its data structure is not expandable, i.e., resizable. 
  *
- * Author: AL
+ * Author: AL, Isaac James
  * Last modified on: Sept. 2023
  */
 
