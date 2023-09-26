@@ -37,8 +37,6 @@ MyADT::MyADT() {
 
 // Copy constructor
 MyADT::MyADT(const MyADT& rhs) {
-   // Call default constructor
-
    // Copy data
    for(unsigned int i = 0; i < MAX_ALPHA; i++) {
       // Create profile array
