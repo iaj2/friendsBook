@@ -44,22 +44,24 @@ private:
  * You can add private methods to this class.
  */
 
-    // Description: Returns a boolean stating whether or not an elements array at a given index is full
-    //              returns "true" if full
+    // Description: Checks if elements array (profile array) is full
+    // Precondition: index must be valid. 
+    // Should raise exception if not valid but we haven't covered that yet.. :)
+    // Poscondition Returns "true" if full
     //              otherwise "false"
-    // Precondition: index must be valid
     bool elementsArrIsFull(int index) const;
 
-    // Description: Returns a boolean stating whether or not an elements array at a given index is empty
-    //              returns "true" if empty
-    //              otherwise "false"
+    // Description: Checks if elements array (profile array) is empty
     // Precondition: index must be valid
+    // Should raise exception if not valid but we haven't covered that yet.. :)
+    // Poscondition: Returns "true" if empty
+    //              otherwise "false"
     bool elementsArrIsEmpty(int index) const;
 
-    // Description: Performs binary search on profile array at a given index.
-    //              Returns the index of the profile if found
-    //              Otherwise -1
+    // Description: Searches for profile at a given element (profile) array with binary ssearch
     // Precondition: index must be valid
+    // Poscondition: Returns the index of the profile if found
+    //               Otherwise -1
     int binarySearchOnProfiles(const Profile &target, int index) const;
 
 
@@ -102,7 +104,7 @@ public:
     // Description: Remove all elements.
     // Postcondition: each element in the elements array should point to a default
     // array of profiles. Element count for all indices should be set to zero.
-    // Time Efficiency: O(k) where k = total # of elements in the elements array 
+    // Time Efficiency: O(n) where n = total # of elements in the elements array (not profiles)
     void removeAll();
    
     // Description: Search for target element.

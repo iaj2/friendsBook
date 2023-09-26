@@ -35,7 +35,7 @@ MyADT::MyADT() {
 }  // end default constructor
 
 
-// Copy constructor - Covered in Lab 3
+// Copy constructor
 MyADT::MyADT(const MyADT& rhs) {
    // Call default constructor
 
@@ -79,27 +79,34 @@ MyADT::~MyADT() {
 
 } // end destructor
 
-// Description: Returns a boolean stating whether or not an elements array at a given index is full
-//              returns "true" if full
+// Description: Checks if elements array (profile array) is full
+// Precondition: index must be valid. 
+// Should raise exception if not valid but we haven't covered that yet.. :)
+// Poscondition Returns "true" if full
 //              otherwise "false"
-// Precondition: index must be valid
 bool MyADT::elementsArrIsFull(int index) const{
    return elementCount[index] == MAX_ELEMENTS;
 }
 
-// Description: Returns a boolean stating whether or not an elements array at a given index is empty
-//              returns "true" if empty
-//              otherwise "false"
+// Description: Checks if elements array (profile array) is empty
 // Precondition: index must be valid
+// Should raise exception if not valid but we haven't covered that yet.. :)
+// Poscondition: Returns "true" if empty
+//              otherwise "false"
 bool MyADT::elementsArrIsEmpty(int index) const{
    return elementCount[index] == 0 && elements[index] == nullptr;
 }
 
-// Description: Performs binary search on profile array at a given index.
-//              Returns the index of the profile if found
-//              Otherwise -1
+// Description: Searches for profile at a given element (profile) array with binary ssearch
 // Precondition: index must be valid
+// Poscondition: Returns the index of the profile if found
+//               Otherwise -1
 int MyADT::binarySearchOnProfiles(const Profile &target, int index) const {
+   // fail on non valid index
+   if(index < 0 || index >= MAX_ALPHA) {
+      return -1;
+   }
+
    int l = 0;
    int r = elementCount[index] - 1;
    int mid;
