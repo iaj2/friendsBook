@@ -88,13 +88,16 @@ int main () {
 
 
     // Set up profiles array to use for inserting, searching and removing
-    Profile profilesToTest_1[] = {
-        Profile("Anna"), Profile("Bob"), Profile("Zuck"), Profile("Aang")
+    // Test Aang and then Anna to ensure insert at end works properly
+    const int profiles1ArrSize = 6;
+    Profile profilesToTest_1[profiles1ArrSize] = {
+        Profile("Aang"), Profile("Bob"), Profile("Zuck"), Profile("Anna"), 
+        Profile("Bill"), Profile("Benny")
     }; // allocate on stack
 
     // Test insert and find inserted element
     cout << "-- TEST INSERT --" << endl;
-    for(int i = 0 ; i < 4; i++){
+    for(int i = 0 ; i < profiles1ArrSize; i++){
         if(testInsert(*adt, profilesToTest_1[i])) {
             cout << "PASSED " << i+1 << endl;
         }
@@ -105,7 +108,7 @@ int main () {
 
     // Test search for elements just inserted
     cout << "-- TEST SEARCH --" << endl;
-    for(int i = 0 ; i < 4; i++){
+    for(int i = 0 ; i < profiles1ArrSize; i++){
         if(testSearch(*adt, profilesToTest_1[i])) {
             cout << "PASSED " << i+1 << endl;
         }
@@ -115,8 +118,8 @@ int main () {
     }
 
     // Check element count again
-    cout << "-- TEST GET ELEMENT COUNT (EXPECTED: 4) --" << endl;
-    if(testGetElementCount(*adt, 4)) {
+    cout << "-- TEST GET ELEMENT COUNT (EXPECTED: 6) --" << endl;
+    if(testGetElementCount(*adt, profiles1ArrSize)) {
         cout << "PASSED" << endl;
     }
     else {
@@ -151,16 +154,14 @@ int main () {
 
     // Test Insert on full and remove non-existent profile
     // Precondition: number of profiles to test must be > MAX_ELEMENTS
-    Profile profilesToTest_2[] = {
-        Profile("Anna"), Profile("Aang"), Profile("Abba"), Profile("Abbey"),
-        Profile("Alicia"), Profile("Axel")
+    const int profile2ArrSize = 6;
+    Profile profilesToTest_2[profile2ArrSize] = {
+        Profile("Anna"), Profile("Alicia"), Profile("Abba"), Profile("Abbey"),
+        Profile("Aang"), Profile("Axel")
     }; // allocate on stack
     
     cout << "-- TEST INSERT ON FULL --" << endl;
-    for(int i = 0; i < 5; i++) {
-        if (i==5) {
-            
-        }
+    for(int i = 0; i < profile2ArrSize-1; i++) {
         if(testInsert(*adt, profilesToTest_2[i])) {
             cout << "PASSED " << i+1<< endl;
         }
@@ -168,7 +169,7 @@ int main () {
             cout << "FAILED " << i+1 << endl;
         }
     } // SHOULD FAIL TO INSERT
-    if(!testInsert(*adt, profilesToTest_2[5])) {
+    if(!testInsert(*adt, profilesToTest_2[profile2ArrSize-1])) {
             cout << "PASSED " << 6 << endl;
         }
         else {
@@ -176,7 +177,7 @@ int main () {
         }
     // SHOULD FAIL TO REMOVE
     cout << "-- TEST REMOVE NON-EXISTENT PROFILE --" << endl;
-    if(!testRemove(*adt, profilesToTest_2[5])) {
+    if(!testRemove(*adt, profilesToTest_2[profile2ArrSize-1])) {
             cout << "PASSED" << endl;
         }
         else {
@@ -189,7 +190,7 @@ int main () {
 
     // Check element count again
     cout << "-- TEST GET ELEMENT COUNT (EXPECTED: 5) --" << endl;
-    if(testGetElementCount(*adt, 5)) {
+    if(testGetElementCount(*adt, profile2ArrSize-1)) {
         cout << "PASSED" << endl;
     }
     else {
@@ -208,7 +209,7 @@ int main () {
 
     // Test remove all using remove()
     cout << "-- TEST REMOVE ALL WITH SINGLE REMOVE --" << endl;
-    for(int i = 0; i < 5; i++) {
+    for(int i = 0; i < profile2ArrSize-1; i++) {
         if (testRemove(*adt, profilesToTest_2[i])) {
             cout << "PASSED " << i+1 << endl;
         }
