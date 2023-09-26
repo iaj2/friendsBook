@@ -57,7 +57,10 @@ void join(MyADT & theMembers) {
    newProfile.setBirthday(birthday);
 
    // Insert profile into MyADT
-   theMembers.insert(newProfile);
+   if(!theMembers.insert(newProfile)) {
+      cout << "Network full! Try a username with a different first letter." << endl;
+      return;
+   }
 
    cout << "You successfully joined the network ! :)" << endl;
 

@@ -156,7 +156,6 @@ bool MyADT::insert(const Profile& newElement) {
       return false;
    }
 
-
    // Check if empty
    if(elementsArrIsEmpty(arrIndex)) {
       // Init new profile array
@@ -165,15 +164,8 @@ bool MyADT::insert(const Profile& newElement) {
 
       // Check for failure to allocate memory for new profile array
       if(elements[arrIndex] == nullptr) return false; 
-
-      // Insert in first position
-      elements[arrIndex][0] = newElement;
-
-      // Increment element count
-      elementCount[arrIndex]++;
-
-      return true;
    }
+
 
    for(unsigned int i = 0; i < elementCount[arrIndex]; i++) {
       // If new element userName is less than the userName found at i'th element,
@@ -194,10 +186,11 @@ bool MyADT::insert(const Profile& newElement) {
          return false;
       }
    }
+   // Insert at end if not yet inserted
+   elements[arrIndex][elementCount[arrIndex]] = newElement;
+   elementCount[arrIndex]++;
 
-
-   // If for whatever reason, not inserted return false
-   return false;
+   return true;
 
 }  // end insert
 
