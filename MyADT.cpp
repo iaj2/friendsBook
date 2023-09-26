@@ -37,6 +37,8 @@ MyADT::MyADT() {
 
 // Copy constructor
 MyADT::MyADT(const MyADT& rhs) {
+   // Call default constructor
+
    // Copy data
    for(unsigned int i = 0; i < MAX_ALPHA; i++) {
       // Create profile array
@@ -101,7 +103,7 @@ bool MyADT::elementsArrIsEmpty(int index) const{
 //               Otherwise -1
 int MyADT::binarySearchOnProfiles(const Profile &target, int index) const {
    // fail on non valid index
-   if(index < 0 || index >= MAX_ALPHA) {
+   if(index < 0 || (unsigned int)index >= MAX_ALPHA) {
       return -1;
    }
 
@@ -242,13 +244,6 @@ bool MyADT::remove(const Profile& toBeRemoved) {
       return false;
    }
 
-   // nullify element pointer if removal will cause profile array to be empty
-   if(elementCount[arrIndex] == 1) {
-      elements[arrIndex] = nullptr;
-      elementCount[arrIndex] = 0;
-      return true;
-   }
-   
    // Binary Search to find index to remove
    int indexToRemove = binarySearchOnProfiles(toBeRemoved, arrIndex);
   
@@ -267,7 +262,7 @@ bool MyADT::remove(const Profile& toBeRemoved) {
 
    // delete array if empty now
    if(elementCount[arrIndex] == 0) {
-      delete elements[arrIndex];
+      delete[] elements[arrIndex];
       elements[arrIndex] = nullptr;
    }
 
