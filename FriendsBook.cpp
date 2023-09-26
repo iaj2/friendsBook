@@ -18,14 +18,13 @@
 #include "MyADT.h"
 
 using std::cout;
-using std::ws;
 using std::cin;
 using std::endl;
 using std::getline;
 
 
 void join(MyADT & theMembers) {
-   Profile* newProfile;
+   Profile newProfile;
    string userName;
    string name;
    string email;
@@ -34,19 +33,11 @@ void join(MyADT & theMembers) {
    // Init new profile with userName from user input
    cout << "Enter a userName (only lower/upper letters and underscore allowed, max 16 char)" << endl;
    cin >> userName;
-   newProfile = new Profile(userName);
-   
-
-   // Check for memory allocation failure
-   if(newProfile == nullptr) {
-      cout << "Sorry. Something went wrong :(" << endl;
-      return;
-   }
+   newProfile = Profile(userName);
 
    // Check if userName already exists
-   if(theMembers.search(*newProfile) != nullptr) {
+   if(theMembers.search(newProfile) != nullptr) {
       cout << "Sorry that userName is taken :(" << endl;
-      delete newProfile; // Delete new profile because of failure
       return;
    }
 
@@ -61,12 +52,12 @@ void join(MyADT & theMembers) {
    getline(cin, birthday);
 
    // Set profile data
-   newProfile->setName(name);
-   newProfile->setEmail(email);
-   newProfile->setBirthday(birthday);
+   newProfile.setName(name);
+   newProfile.setEmail(email);
+   newProfile.setBirthday(birthday);
 
    // Insert profile into MyADT
-   theMembers.insert(*newProfile);
+   theMembers.insert(newProfile);
 
    cout << "You successfully joined the network ! :)" << endl;
 
@@ -75,21 +66,17 @@ void join(MyADT & theMembers) {
 // Removes profile from MyADT with a given username received on user input
 void leave(MyADT & theMembers) {
    string userName;
-   Profile * toLeave;
+   Profile toLeave;
    cout << "Enter user name to leave the netowrk." << endl;
    cin >> userName;
 
    // Init new profile object with userName from user input
-   toLeave = new Profile(userName);
-   if(toLeave == nullptr) { // Check memory failure
-      cout << "Sorry. Something went wrong :(" << endl;
-      return;
-   }
+   toLeave = Profile(userName);
+
 
    // Check remove failure (userName not found)
-   if(!theMembers.remove(*toLeave)) {
+   if(!theMembers.remove(toLeave)) {
       cout << "Failed to leave the network.. User name must not exist" << endl;
-      delete toLeave;
       return;
    }
 
@@ -99,28 +86,21 @@ void leave(MyADT & theMembers) {
 // Searches for a profile from a given MyADT with a username received on user input
 void search(MyADT & theMembers) {
    string userName;
-   Profile * target;
-   Profile * foundUser;
+   Profile target;
+   Profile* foundUser;
    cout << "Enter the user name you'd like to search up" << endl;
    cin >> userName;
 
-   target = new Profile(userName);
-   if(target == nullptr) {
-      cout << "Sorry, something went wrong :(" << endl;
-      return;
-   }
+   target = Profile(userName);
 
-   foundUser = theMembers.search(*target);
+   foundUser = theMembers.search(target);
    if(foundUser == nullptr) {
       cout << "No user with that userName exists" << endl;
-      delete target;
       return;
    }
    
    cout << "User found ! Displaying profile information" << endl;
    cout << *foundUser;
-
-   delete target;
 }
 
 // Modifies name on given profile based on user input
@@ -159,26 +139,18 @@ void modify(MyADT & theMembers) {
    char input = 0;
 
    string userName;
-   Profile * target;
+   Profile target;
    Profile * foundUser;
    cout << "Enter the user name you'd like to modify" << endl;
    cin >> userName;
 
-   target = new Profile(userName);
-   if(target == nullptr) {
-      cout << "Sorry, something went wrong :(" << endl;
-      return;
-   }
+   target = Profile(userName);
 
-   foundUser = theMembers.search(*target);
+   foundUser = theMembers.search(target);
    if(foundUser == nullptr) {
       cout << "No user with that userName exists" << endl;
-      delete target;
       return;
    }
-
-   delete target; 
-
         
    // Keep going until the user exits
    while (!done) {
