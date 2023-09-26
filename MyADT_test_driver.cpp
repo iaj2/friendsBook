@@ -27,6 +27,7 @@ bool testInsert(MyADT &adt, Profile &profile) {
     return adt.insert(profile);
 }
 
+// Description: tests the search() method of MyADT
 bool testSearch(MyADT &adt, Profile &profile) {
     return (adt.search(profile) != nullptr);
 }

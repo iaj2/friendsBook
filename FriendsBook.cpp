@@ -31,7 +31,7 @@ void join(MyADT & theMembers) {
    string email;
    string birthday;
 
-   // Get userName from user
+   // Init new profile with userName from user input
    cout << "Enter a userName (only lower/upper letters and underscore allowed, max 16 char)" << endl;
    cin >> userName;
    newProfile = new Profile(userName);
@@ -65,24 +65,28 @@ void join(MyADT & theMembers) {
    newProfile->setEmail(email);
    newProfile->setBirthday(birthday);
 
+   // Insert profile into MyADT
    theMembers.insert(*newProfile);
 
    cout << "You successfully joined the network ! :)" << endl;
 
 }
 
+// Removes profile from MyADT with a given username received on user input
 void leave(MyADT & theMembers) {
    string userName;
    Profile * toLeave;
    cout << "Enter user name to leave the netowrk." << endl;
    cin >> userName;
 
+   // Init new profile object with userName from user input
    toLeave = new Profile(userName);
-   if(toLeave == nullptr) {
+   if(toLeave == nullptr) { // Check memory failure
       cout << "Sorry. Something went wrong :(" << endl;
       return;
    }
 
+   // Check remove failure (userName not found)
    if(!theMembers.remove(*toLeave)) {
       cout << "Failed to leave the network.. User name must not exist" << endl;
       delete toLeave;
@@ -92,6 +96,7 @@ void leave(MyADT & theMembers) {
    cout << userName << " successfully" << " left the network" << endl;
 }
 
+// Searches for a profile from a given MyADT with a username received on user input
 void search(MyADT & theMembers) {
    string userName;
    Profile * target;
@@ -118,6 +123,7 @@ void search(MyADT & theMembers) {
    delete target;
 }
 
+// Modifies name on given profile based on user input
 void modifyName(Profile &profile) {
    string newName;
    cout << "Enter name" << endl;
@@ -127,6 +133,7 @@ void modifyName(Profile &profile) {
    profile.setName(newName);
 }
 
+// Description: modifies email on given profile based on user input
 void modifyEmail(Profile &profile) {
    string newEmail;
    cout << "Enter new email (valid address, no spaces.)" << endl;
@@ -135,6 +142,7 @@ void modifyEmail(Profile &profile) {
    profile.setEmail(newEmail);
 }
 
+// Description: modifies the birthday on a given profile based on user input
 void modifyBirthday(Profile &profile) {
    string newBirthday;
    cout << "Enter new birthday (month day year)" << endl;
@@ -144,6 +152,8 @@ void modifyBirthday(Profile &profile) {
    profile.setBirthday(newBirthday);
 }
 
+// Gets username for profile to modify and then  
+// calls respective modification function based on user input
 void modify(MyADT & theMembers) {
    bool done = false;
    char input = 0;
@@ -195,6 +205,7 @@ void modify(MyADT & theMembers) {
 
 }
 
+// Description: prints profiles stored in given MyADT
 void print(MyADT & theMembers) {
    theMembers.print();
 }
